@@ -11,7 +11,12 @@
 
         <label>
             Username:
-            <h:inputText id="username" value="#{loginBean.username}" required="true"/>
+            <h:inputText id="username" value="#{loginBean.user}" required="true"/>
+            <h:commandButton value="Login" action="#{loginBean.login}"/>
+
+            <br/>
+            <!-- Anzeige nur, wenn Fehler vorhanden -->
+            <h:outputText value="errorMessage:#{loginBean.errorMessage}" rendered="#{not empty loginBean.errorMessage}"/>
         </label>
 
     </h:form>
