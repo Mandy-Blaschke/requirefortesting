@@ -1,4 +1,4 @@
-package de.mandyblaschke.requirefortesting;
+package de.mandyblaschke.requirefortesting.pages;
 
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
@@ -7,17 +7,17 @@ import java.io.Serializable;
 
 @Named
 @SessionScoped
-public class LoginBean implements Serializable {
+public class LoginPageBean implements Serializable {
 
     // Username + Getter + Setter
-    private String user = "";
+    private String userInput = "";
 
-    public String getUser() {
-        return user;
+    public String getUserInput() {
+        return userInput;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUserInput(String userInput) {
+        this.userInput = userInput;
     }
 
     // Error + Getter + Setter
@@ -54,11 +54,10 @@ public class LoginBean implements Serializable {
         this.role = role;
     }
 
-    // Login Funktion
     public String login() {
         boolean loginSuccess = false;
 
-        if (user.equals("yolo")) {
+        if (userInput.equals("yolo")) {
             setRole("re");
             loginSuccess = true;
         }
