@@ -1,15 +1,19 @@
 package de.mandyblaschke.requirefortesting.pages;
 
-import jakarta.enterprise.context.SessionScoped;
+import de.mandyblaschke.requirefortesting.global.AuthorizeBean;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
 
 @Named
-@SessionScoped
+@RequestScoped
 public class LoginPageBean implements Serializable {
 
-    // Username + Getter + Setter
+    @Inject
+    private AuthorizeBean authorizeBean;
+
     private String userInput = "";
 
     public String getUserInput() {
@@ -20,8 +24,7 @@ public class LoginPageBean implements Serializable {
         this.userInput = userInput;
     }
 
-    // Error + Getter + Setter
-    private String errorMessage = "";
+    private String errorMessage = null;
 
     public String getErrorMessage() {
         return errorMessage;
@@ -31,40 +34,13 @@ public class LoginPageBean implements Serializable {
         this.errorMessage = errorMessage;
     }
 
-    // isAuthorized + Getter + Setter
-    private boolean isAuthorized = false;
 
-    public boolean isAuthorized() {
-        return isAuthorized;
-    }
-
-    public void setAuthorized(boolean authorized) {
-        isAuthorized = authorized;
-    }
-
-    // Rolle + Getter + Setter
-
-    private String role;
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String login() {
-        boolean loginSuccess = false;
-
-        if (userInput.equals("yolo")) {
-            setRole("re");
-            loginSuccess = true;
-        }
+    public String loginSubmit() {
+        boolean loginSuccess = authorizeBean.tryLogin(userInput);
 
         if (loginSuccess) {
-            errorMessage = "";
-            if (role.equals("re")) {
+            errorMessage = null;
+            if (authorizeBean.getRole().equals("re")) {
                 return "re.xhtml?faces-redirect=true";
             }
         } else {

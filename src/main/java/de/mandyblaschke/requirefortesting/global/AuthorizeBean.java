@@ -33,4 +33,8 @@ public class AuthorizeBean implements Serializable {
         this.role = role;
     }
 
+    public boolean tryLogin(String user) {
+        return false;
+    }
+
 }

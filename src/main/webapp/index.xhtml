@@ -12,10 +12,9 @@
         <label>
             Username:
             <h:inputText id="user" value="#{loginPageBean.userInput}" required="true"/>
-            <h:commandButton value="Login" action="#{loginPageBean.login}"/>
+            <h:commandButton value="Login" action="#{loginPageBean.loginSubmit}"/>
 
             <br/>
-            <!-- Anzeige nur, wenn Fehler vorhanden -->
             <h:outputText value="errorMessage:#{loginPageBean.errorMessage}" rendered="#{not empty loginPageBean.errorMessage}"/>
         </label>
 
