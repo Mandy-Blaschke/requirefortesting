@@ -6,13 +6,19 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
-    <h:form>
-        <h1>Testmanager</h1>
+    <h:panelGroup rendered="#{authorizeBean.user.role != 'Testmanager'}">
+        Zugriff verweigert!
+    </h:panelGroup>
 
-        <h:outputText value="username:#{authorizeBean.user}"/>
-        <br/>
-        <h:outputText value="role:#{authorizeBean.user.role}"/>
+    <h:panelGroup rendered="#{authorizeBean.user.role == 'Testmanager'}">
+        <h:form>
+            <h1>Testmanager:in</h1>
 
-    </h:form>
+            <h:outputText value="username:#{authorizeBean.user}"/>
+            <br/>
+            <h:outputText value="role:#{authorizeBean.user.role}"/>
+
+        </h:form>
+    </h:panelGroup>
 </f:view>
 </html>

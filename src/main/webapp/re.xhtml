@@ -6,13 +6,22 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
-    <h:form>
-        <h1>Requirements Engineer</h1>
 
-        <h:outputText value="username:#{authorizeBean.user}"/>
-        <br/>
-        <h:outputText value="role:#{authorizeBean.user.role}"/>
+    <h:panelGroup rendered="#{authorizeBean.user.role != 'Requirements Engineer'}">
+        Zugriff verweigert!
+    </h:panelGroup>
 
-    </h:form>
+    <h:panelGroup rendered="#{authorizeBean.user.role == 'Requirements Engineer'}">
+        <h:form>
+            <h1>Requirements Engineer</h1>
+
+            <h:outputText value="username:#{authorizeBean.user}"/>
+            <br/>
+            <h:outputText value="role:#{authorizeBean.user.role}"/>
+
+        </h:form>
+    </h:panelGroup>
+
+
 </f:view>
 </html>
