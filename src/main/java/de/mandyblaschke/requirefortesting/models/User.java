@@ -1,6 +1,5 @@
 package de.mandyblaschke.requirefortesting.models;
 
-import java.util.Objects;
 
 public class User {
     private int id;

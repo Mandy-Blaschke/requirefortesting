@@ -40,9 +40,19 @@ public class LoginPageBean implements Serializable {
 
         if (loginSuccess) {
             errorMessage = null;
-            if (authorizeBean.getRole().equals("re")) {
-                return "re.xhtml?faces-redirect=true";
+            String role = authorizeBean.getUser().getRole();
+
+            switch (role) {
+                case "Requirements Engineer":
+                    return "re.xhtml?faces-redirect=true";
+                case "Testmanager":
+                    return "tm.xhtml?faces-redirect=true";
+                case "Tester":
+                    return "t.xhtml?faces-redirect=true";
+                case "Testfallersteller":
+                    return "tfe.xhtml?faces-redirect=true";
             }
+
         } else {
             errorMessage = "User nicht gefunden.";
         }

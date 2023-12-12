@@ -1,6 +1,7 @@
 package de.mandyblaschke.requirefortesting.database;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 
 import java.io.Serializable;

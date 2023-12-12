@@ -1,6 +1,10 @@
 package de.mandyblaschke.requirefortesting.global;
 
+import de.mandyblaschke.requirefortesting.database.UserDbBean;
+import de.mandyblaschke.requirefortesting.models.User;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
@@ -9,13 +13,16 @@ import java.io.Serializable;
 @SessionScoped
 public class AuthorizeBean implements Serializable {
 
-    private String user = null;
+    @Inject
+    private UserDbBean userDbBean;
 
-    public String getUser() {
+    private User user = null;
+
+    public User getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -23,18 +30,16 @@ public class AuthorizeBean implements Serializable {
         return user != null;
     }
 
-    private String role;
+    public boolean tryLogin(String mail) {
+        User userByMail = userDbBean.getUserByMail(mail);
+        if (userByMail != null) {
+            setUser(userByMail);
+            return true;
+        } else {
+            setUser(null);
+            return false;
+        }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public boolean tryLogin(String user) {
-        return false;
     }
 
 }
