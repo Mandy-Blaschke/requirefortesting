@@ -14,11 +14,13 @@ public class LoginPageBean implements Serializable {
 
     @Inject
     private AuthorizeBean authorizeBean;
+    @Inject
+    private TfePageBean tfePageBean;
 
     @Inject
     private RePageBean rePageBean;
 
-    private String userInput = "re@test.de";
+    private String userInput = "tfe@test.de";
 
     public String getUserInput() {
         return userInput;
@@ -55,6 +57,7 @@ public class LoginPageBean implements Serializable {
                 case "Tester":
                     return "t.xhtml?faces-redirect=true";
                 case "Testfallersteller":
+                    tfePageBean.gotoList();
                     return "tfe.xhtml?faces-redirect=true";
             }
 

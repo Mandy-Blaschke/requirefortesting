@@ -5,6 +5,9 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <h:outputStylesheet name="style.css"/>
+</h:head>
 <f:view>
 
     <h:panelGroup rendered="#{authorizeBean.user.role != 'Testfallersteller'}">
@@ -15,11 +18,92 @@
         <h:form>
             <h1>Testfallersteller:in</h1>
 
-            <h:outputText value="username:#{authorizeBean.user}"/>
-            <br/>
-            <h:outputText value="role:#{authorizeBean.user.role}"/>
+            <h:panelGroup rendered="#{tfePageBean.view == 'list'}">
+                <h2>Anforderungen</h2>
+
+                <h:commandButton value="Hinzufügen" action="#{tfePageBean.gotoAdd()}"/>
+                <br/>
+
+                <h:dataTable value="#{tfePageBean.listTestfall}" var="tf">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                        #{tf.id}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Beschreibung</f:facet>
+                        #{tf.beschreibung}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Anforderung (ID)</f:facet>
+                        #{tf.anforderung} (#{tf.anforderungId})
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Aktionen</f:facet>
+                        <h:commandButton value="Bearbeiten" action="#{tfePageBean.gotoEdit(tf)}"/>
+                        <h:commandButton value="Löschen" action="#{tfePageBean.remove(tf)}"/>
+                    </h:column>
+                </h:dataTable>
+
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{tfePageBean.view == 'add'}">
+                <h2>Neuer Testfall</h2>
+
+                <label>
+                    Beschreibung des Testfalls:
+                    <h:inputText value="#{tfePageBean.beschreibungInput}" required="true"/>
+                </label>
+                <br/>
+
+                <label>
+                    Anforderung (ID) des Testfalls:
+                    <h:selectOneMenu value="#{tfePageBean.anforderungIdInput}">
+                        <f:selectItems value="#{tfePageBean.listAnforderung}"
+                                       var="anf"
+                                       itemValue="#{anf.id}"
+                                       itemLabel="#{anf.name}" />
+                    </h:selectOneMenu>
+                </label>
+                <br/>
+
+                <h:commandButton value="Speichern" action="#{tfePageBean.add()}"/>
+                <br/>
+                <h:commandButton value="Abbrechen" immediate="true" action="#{tfePageBean.gotoList()}"/>
+
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{tfePageBean.view == 'edit'}">
+                <h2>Testfall Editieren</h2>
+
+                <label>
+                    Beschreibung des Testfalls:
+                    <h:inputText value="#{tfePageBean.beschreibungInput}" required="true"/>
+                </label>
+                <br/>
+
+                <label>
+                    Anforderung (ID) des Testfalls:
+                    <h:selectOneMenu value="#{tfePageBean.anforderungIdInput}">
+                        <f:selectItems value="#{tfePageBean.listAnforderung}"
+                                       var="anf"
+                                       itemValue="#{anf.id}"
+                                       itemLabel="#{anf.name}" />
+                    </h:selectOneMenu>
+                </label>
+                <br/>
+
+                <h:commandButton value="Speichern" action="#{tfePageBean.saveEdit()}"/>
+                <br/>
+                <h:commandButton value="Abbrechen" immediate="true" action="#{tfePageBean.gotoList()}"/>
+
+            </h:panelGroup>
 
         </h:form>
     </h:panelGroup>
+
+
 </f:view>
 </html>
