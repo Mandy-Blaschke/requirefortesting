@@ -41,7 +41,7 @@ public class AnforderungenDbBean implements Serializable {
             ps.setString(1, name);
             ps.setString(2, inhalt);
 
-            ps.executeQuery();
+            ps.executeUpdate();
 
         } catch (SQLException ignored) {
         }
@@ -55,7 +55,7 @@ public class AnforderungenDbBean implements Serializable {
             ps.setString(2, inhalt);
             ps.setInt(3, editId);
 
-            ps.executeQuery();
+            ps.executeUpdate();
 
         } catch (SQLException ignored) {
         }
@@ -66,7 +66,7 @@ public class AnforderungenDbBean implements Serializable {
         ) {
             ps.setInt(1, removeId);
 
-            ps.executeQuery();
+            ps.executeUpdate();
 
         } catch (SQLException ignored) {
         }

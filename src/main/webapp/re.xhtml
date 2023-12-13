@@ -5,6 +5,9 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <h:outputStylesheet name="style.css"/>
+</h:head>
 <f:view>
 
     <h:panelGroup rendered="#{authorizeBean.user.role != 'Requirements Engineer'}">
@@ -15,9 +18,57 @@
         <h:form>
             <h1>Requirements Engineer</h1>
 
-            <h:outputText value="username:#{authorizeBean.user}"/>
-            <br/>
-            <h:outputText value="role:#{authorizeBean.user.role}"/>
+            <h:panelGroup rendered="#{rePageBean.view == 'list'}">
+                <h2>Anforderungen</h2>
+
+                <h:commandButton value="Hinzufügen" action="#{rePageBean.gotoAdd()}"/>
+                <br/>
+
+                <h:dataTable value="#{rePageBean.listAnforderungen}" var="anf">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                        #{anf.id}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Name</f:facet>
+                        #{anf.name}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Inhalt</f:facet>
+                        #{anf.inhalt}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Aktionen</f:facet>
+                        <h:commandButton value="Löschen" action="#{rePageBean.remove(anf.id)}"/>
+                    </h:column>
+                </h:dataTable>
+
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{rePageBean.view == 'add'}">
+                <h2>Neue Anforderung</h2>
+
+                <label>
+                    Name der Anforderung:
+                    <h:inputText value="#{rePageBean.nameInput}" required="true"/>
+                </label>
+                <br/>
+
+                <label>
+                    Inhalt der Anforderung:
+                    <h:inputText value="#{rePageBean.inhaltInput}" required="true"/>
+                </label>
+                <br/>
+
+                <h:commandButton value="Speichern" action="#{rePageBean.add()}"/>
+                <br/>
+                <h:commandButton value="Abbrechen" immediate="true" action="#{rePageBean.gotoList()}"/>
+
+
+            </h:panelGroup>
 
         </h:form>
     </h:panelGroup>

@@ -1,5 +1,6 @@
 package de.mandyblaschke.requirefortesting.pages;
 
+import de.mandyblaschke.requirefortesting.database.AnforderungenDbBean;
 import de.mandyblaschke.requirefortesting.global.AuthorizeBean;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
@@ -14,7 +15,10 @@ public class LoginPageBean implements Serializable {
     @Inject
     private AuthorizeBean authorizeBean;
 
-    private String userInput = "";
+    @Inject
+    private RePageBean rePageBean;
+
+    private String userInput = "re@test.de";
 
     public String getUserInput() {
         return userInput;
@@ -44,6 +48,7 @@ public class LoginPageBean implements Serializable {
 
             switch (role) {
                 case "Requirements Engineer":
+                    rePageBean.gotoList();
                     return "re.xhtml?faces-redirect=true";
                 case "Testmanager":
                     return "tm.xhtml?faces-redirect=true";
