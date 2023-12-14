@@ -5,18 +5,90 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <h:outputStylesheet name="style.css"/>
+</h:head>
 <f:view>
     <h:panelGroup rendered="#{authorizeBean.user.role != 'Testmanager'}">
         Zugriff verweigert!
     </h:panelGroup>
 
     <h:panelGroup rendered="#{authorizeBean.user.role == 'Testmanager'}">
+
         <h:form>
             <h1>Testmanager:in</h1>
 
-            <h:outputText value="username:#{authorizeBean.user}"/>
-            <br/>
-            <h:outputText value="role:#{authorizeBean.user.role}"/>
+            <h:panelGroup rendered="#{tmPageBean.view == 'list'}">
+                <h2>Testläufe</h2>
+
+                <h:commandButton value="Hinzufügen" action="#{tmPageBean.gotoAdd()}"/>
+                <br/>
+
+                <h:dataTable value="#{tmPageBean.listTestlauf}" var="tl">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                        #{tl.id}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Testlauf</f:facet>
+                        #{tl.name}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Tester:in</f:facet>
+                        #{tl.testerUserMail}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Testfälle</f:facet>
+                        <h:dataTable value="#{tl.testfaelleBeschreibungen}" var="beschreibung">
+                            <h:column>
+                                #{beschreibung}
+                            </h:column>
+                        </h:dataTable>
+                    </h:column>
+
+                </h:dataTable>
+
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{tmPageBean.view == 'add'}">
+                <h2>Neuer Testlauf</h2>
+
+                <label>
+                    Name des Testlaufs:
+                    <h:inputText value="#{tmPageBean.nameInput}" required="true"/>
+                </label>
+                <br/>
+
+                <label>
+                    Tester:in des Testlaufs:
+                    <h:selectOneMenu value="#{tmPageBean.testerUserIdInput}">
+                        <f:selectItems value="#{tmPageBean.listTesterUser}"
+                                       var="t"
+                                       itemValue="#{t.id}"
+                                       itemLabel="#{t.mail}" />
+                    </h:selectOneMenu>
+                </label>
+                <br/>
+
+                <label>
+                    Testfälle:
+                    <h:selectManyCheckbox value="#{tmPageBean.selectedTestfaelleIds}" layout="pageDirection">
+                        <f:selectItems value="#{tmPageBean.listTestfall}"
+                                       var="tf"
+                                       itemValue="#{tf.id}"
+                                       itemLabel="#{tf.beschreibung}" />
+                    </h:selectManyCheckbox>
+                </label>
+                <br/>
+
+                <h:commandButton value="Speichern" action="#{tmPageBean.add()}"/>
+                <br/>
+                <h:commandButton value="Abbrechen" immediate="true" action="#{tmPageBean.gotoList()}"/>
+
+            </h:panelGroup>
 
         </h:form>
     </h:panelGroup>

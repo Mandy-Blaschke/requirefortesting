@@ -16,11 +16,13 @@ public class LoginPageBean implements Serializable {
     private AuthorizeBean authorizeBean;
     @Inject
     private TfePageBean tfePageBean;
+    @Inject
+    private TmPageBean tmPageBean;
 
     @Inject
     private RePageBean rePageBean;
 
-    private String userInput = "tfe@test.de";
+    private String userInput = "tm@test.de";
 
     public String getUserInput() {
         return userInput;
@@ -53,8 +55,10 @@ public class LoginPageBean implements Serializable {
                     rePageBean.gotoList();
                     return "re.xhtml?faces-redirect=true";
                 case "Testmanager":
+                    tmPageBean.gotoList();
                     return "tm.xhtml?faces-redirect=true";
                 case "Tester":
+                    // tPageBean.gotoList();
                     return "t.xhtml?faces-redirect=true";
                 case "Testfallersteller":
                     tfePageBean.gotoList();

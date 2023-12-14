@@ -7,14 +7,13 @@ public class Testlauf {
     private int id;
     private String name;
     private String testerUserMail;
+    private List<String> testfaelleBeschreibungen;
 
-    private List<Integer> testfaelleIds;
-
-    public Testlauf(int id, String name, int testerUserId, String testerUserMail, List<Integer> testfaelleIds) {
+    public Testlauf(int id, String name, String testerUserMail, List<String> testfaelleBeschreibungen) {
         this.id = id;
         this.name = name;
         this.testerUserMail = testerUserMail;
-        this.testfaelleIds = testfaelleIds;
+        this.testfaelleBeschreibungen = testfaelleBeschreibungen;
     }
 
     public int getId() {
@@ -41,11 +40,11 @@ public class Testlauf {
         this.testerUserMail = testerUserMail;
     }
 
-    public List<Integer> getTestfaelleIds() {
-        return testfaelleIds;
+    public List<String> getTestfaelleBeschreibungen() {
+        return testfaelleBeschreibungen;
     }
 
-    public void setTestfaelleIds(List<Integer> testfaelleIds) {
-        this.testfaelleIds = testfaelleIds;
+    public void setTestfaelleBeschreibungen(List<String> testfaelleBeschreibungen) {
+        this.testfaelleBeschreibungen = testfaelleBeschreibungen;
     }
 }

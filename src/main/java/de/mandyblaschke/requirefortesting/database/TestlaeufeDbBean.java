@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,7 +26,6 @@ public class TestlaeufeDbBean implements Serializable {
                 PreparedStatement ps = datebaseBean.getConnection().prepareStatement("SELECT " +
                         "testlaeufe.id AS tl_id, " +
                         "testlaeufe.name AS tl_name, " +
-                        "user_id AS t_id, " +
                         "user.mail AS t_mail " +
                         "FROM testlaeufe " +
                         "INNER JOIN user " +
@@ -39,9 +39,8 @@ public class TestlaeufeDbBean implements Serializable {
                         new Testlauf(
                                 tlId,
                                 rs.getString("tl_name"),
-                                rs.getInt("t_id"),
                                 rs.getString("t_mail"),
-                                getTestfaelleForTestlauf(tlId)
+                                testfaelleBeschreibungen(tlId)
                         ));
             }
             return resultList;
@@ -50,15 +49,19 @@ public class TestlaeufeDbBean implements Serializable {
         }
     }
 
-    public List<Integer> getTestfaelleForTestlauf(int testlaufId) {
+    public List<String> testfaelleBeschreibungen(int testlaufId) {
         try (
-                PreparedStatement ps = datebaseBean.getConnection().prepareStatement("SELECT testfaelle_id FROM bez_testlaeufe_testfaelle WHERE testlaeufe_id = ?")
+                PreparedStatement ps = datebaseBean.getConnection().prepareStatement(
+                        "SELECT testfaelle.beschreibung AS beschreibung FROM bez_testlaeufe_testfaelle " +
+                                "INNER JOIN testfaelle " +
+                                "ON bez_testlaeufe_testfaelle.testfaelle_id = testfaelle.id " +
+                                "WHERE bez_testlaeufe_testfaelle.testlaeufe_id = ?")
         ) {
             ps.setInt(1, testlaufId);
             ResultSet rs = ps.executeQuery();
-            List<Integer> resultList = new ArrayList<Integer>();
+            List<String> resultList = new ArrayList<String>();
             while (rs.next()) {
-                resultList.add(rs.getInt("testfaelle_id"));
+                resultList.add(rs.getString("beschreibung"));
             }
             return resultList;
         } catch (SQLException e) {
@@ -66,16 +69,38 @@ public class TestlaeufeDbBean implements Serializable {
         }
     }
 
-    public void addTestlauf(String name, int testerUserId) {
+    public void addTestlauf(String name, int testerUserId, List<Integer> testfaelleIds) {
+        Integer testlaufId = null;
+
         try (
-                PreparedStatement ps = datebaseBean.getConnection().prepareStatement("INSERT INTO testlaeufe (name, user_id) VALUES (?, ?)")
+                PreparedStatement ps = datebaseBean.getConnection().prepareStatement("INSERT INTO testlaeufe (name, user_id) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, name);
             ps.setInt(2, testerUserId);
 
             ps.executeUpdate();
 
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    testlaufId = rs.getInt(1);
+                }
+            }
+
         } catch (SQLException ignored) {
+        }
+        if (testlaufId != null) {
+            for (Integer testfallId : testfaelleIds) {
+                try (
+                        PreparedStatement ps = datebaseBean.getConnection().prepareStatement("INSERT INTO bez_testlaeufe_testfaelle (testfaelle_id, testlaeufe_id) VALUES (?, ?)")
+                ) {
+                    ps.setInt(1, testfallId);
+                    ps.setInt(2, testlaufId);
+
+                    ps.executeUpdate();
+
+                } catch (SQLException ignored) {
+                }
+            }
         }
     }
 }
