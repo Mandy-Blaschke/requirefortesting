@@ -24,9 +24,6 @@ public class RePageBean implements Serializable {
     private String nameInput;
     private String inhaltInput;
 
-    private Anforderung anforderungToEdit;
-
-
     public void gotoList() {
         view = "list";
         listAnforderungen = anforderungenDbBean.getAnforderungen();
@@ -38,25 +35,8 @@ public class RePageBean implements Serializable {
         inhaltInput = "";
     }
 
-    public void gotoEdit(Anforderung anforderung) {
-        view = "edit";
-        anforderungToEdit = anforderung;
-        nameInput = anforderung.getName();
-        inhaltInput = anforderung.getInhalt();
-    }
-
     public void add() {
         anforderungenDbBean.addAnforderung(nameInput, inhaltInput);
-        gotoList();
-    }
-
-    public void saveEdit() {
-        anforderungenDbBean.editAnforderung(anforderungToEdit.getId(), nameInput, inhaltInput);
-        gotoList();
-    }
-
-    public void remove(Anforderung anforderung) {
-        anforderungenDbBean.removeAnforderung(anforderung.getId());
         gotoList();
     }
 

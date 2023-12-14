@@ -27,8 +27,7 @@ public class TestfaelleDbBean implements Serializable {
                 PreparedStatement ps = datebaseBean.getConnection().prepareStatement("SELECT " +
                         "testfaelle.id AS id, " +
                         "beschreibung AS beschreibung, " +
-                        "anforderungen.name AS anforderung, " +
-                        "anforderungen.id AS anforderung_id " +
+                        "anforderungen.name AS anforderung " +
                         "FROM testfaelle " +
                         "INNER JOIN anforderungen " +
                         "ON anforderungen_id = anforderungen.id;")
@@ -36,7 +35,7 @@ public class TestfaelleDbBean implements Serializable {
             ResultSet rs = ps.executeQuery();
             List<Testfall> resultList = new ArrayList<Testfall>();
             while (rs.next()) {
-                resultList.add(new Testfall(rs.getInt("id"), rs.getString("beschreibung"), rs.getString("anforderung"), rs.getInt("anforderung_id") ));
+                resultList.add(new Testfall(rs.getInt("id"), rs.getString("beschreibung"), rs.getString("anforderung")));
             }
             return resultList;
         } catch (SQLException e) {
@@ -50,31 +49,6 @@ public class TestfaelleDbBean implements Serializable {
         ) {
             ps.setString(1, beschreibung);
             ps.setInt(2, anforderungId);
-
-            ps.executeUpdate();
-
-        } catch (SQLException ignored) {
-        }
-    }
-
-    public void editTestfall(int editId, String beschreibung, int anforderungId) {
-        try (
-                PreparedStatement ps = datebaseBean.getConnection().prepareStatement("UPDATE testfaelle SET beschreibung = ?, anforderungen_id = ? WHERE id = ?")
-        ) {
-            ps.setString(1, beschreibung);
-            ps.setInt(2, anforderungId);
-            ps.setInt(3, editId);
-
-            ps.executeUpdate();
-
-        } catch (SQLException ignored) {
-        }
-    }
-    public void removeTestfall (int removeId) {
-        try (
-                PreparedStatement ps = datebaseBean.getConnection().prepareStatement("DELETE FROM testfaelle WHERE id = ?")
-        ) {
-            ps.setInt(1, removeId);
 
             ps.executeUpdate();
 

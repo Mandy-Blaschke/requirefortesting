@@ -19,7 +19,7 @@
             <h1>Testfallersteller:in</h1>
 
             <h:panelGroup rendered="#{tfePageBean.view == 'list'}">
-                <h2>Anforderungen</h2>
+                <h2>Testfälle</h2>
 
                 <h:commandButton value="Hinzufügen" action="#{tfePageBean.gotoAdd()}"/>
                 <br/>
@@ -37,14 +37,9 @@
 
                     <h:column>
                         <f:facet name="header">Anforderung (ID)</f:facet>
-                        #{tf.anforderung} (#{tf.anforderungId})
+                        #{tf.anforderung}
                     </h:column>
 
-                    <h:column>
-                        <f:facet name="header">Aktionen</f:facet>
-                        <h:commandButton value="Bearbeiten" action="#{tfePageBean.gotoEdit(tf)}"/>
-                        <h:commandButton value="Löschen" action="#{tfePageBean.remove(tf)}"/>
-                    </h:column>
                 </h:dataTable>
 
             </h:panelGroup>
@@ -59,7 +54,7 @@
                 <br/>
 
                 <label>
-                    Anforderung (ID) des Testfalls:
+                    Anforderung des Testfalls:
                     <h:selectOneMenu value="#{tfePageBean.anforderungIdInput}">
                         <f:selectItems value="#{tfePageBean.listAnforderung}"
                                        var="anf"
@@ -70,32 +65,6 @@
                 <br/>
 
                 <h:commandButton value="Speichern" action="#{tfePageBean.add()}"/>
-                <br/>
-                <h:commandButton value="Abbrechen" immediate="true" action="#{tfePageBean.gotoList()}"/>
-
-            </h:panelGroup>
-
-            <h:panelGroup rendered="#{tfePageBean.view == 'edit'}">
-                <h2>Testfall Editieren</h2>
-
-                <label>
-                    Beschreibung des Testfalls:
-                    <h:inputText value="#{tfePageBean.beschreibungInput}" required="true"/>
-                </label>
-                <br/>
-
-                <label>
-                    Anforderung (ID) des Testfalls:
-                    <h:selectOneMenu value="#{tfePageBean.anforderungIdInput}">
-                        <f:selectItems value="#{tfePageBean.listAnforderung}"
-                                       var="anf"
-                                       itemValue="#{anf.id}"
-                                       itemLabel="#{anf.name}" />
-                    </h:selectOneMenu>
-                </label>
-                <br/>
-
-                <h:commandButton value="Speichern" action="#{tfePageBean.saveEdit()}"/>
                 <br/>
                 <h:commandButton value="Abbrechen" immediate="true" action="#{tfePageBean.gotoList()}"/>
 

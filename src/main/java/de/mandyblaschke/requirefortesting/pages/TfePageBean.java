@@ -27,9 +27,6 @@ public class TfePageBean implements Serializable {
     private String beschreibungInput;
     private int anforderungIdInput;
 
-    private Testfall testfallToEdit;
-
-
     public void gotoList() {
         view = "list";
         listTestfall = testfaelleDbBean.getTestfaelle();
@@ -43,27 +40,9 @@ public class TfePageBean implements Serializable {
         listAnforderung = anforderungenDbBean.getAnforderungen();
     }
 
-    public void gotoEdit(Testfall testfall) {
-        view = "edit";
-        testfallToEdit = testfall;
-        beschreibungInput = testfall.getBeschreibung();
-        anforderungIdInput = testfall.getAnforderungId();
-
-        listAnforderung = anforderungenDbBean.getAnforderungen();
-    }
 
     public void add() {
         testfaelleDbBean.addTestfall(beschreibungInput, anforderungIdInput);
-        gotoList();
-    }
-
-    public void saveEdit() {
-        testfaelleDbBean.editTestfall(testfallToEdit.getId(), beschreibungInput, anforderungIdInput);
-        gotoList();
-    }
-
-    public void remove(Testfall testfall) {
-        testfaelleDbBean.removeTestfall(testfall.getId());
         gotoList();
     }
 

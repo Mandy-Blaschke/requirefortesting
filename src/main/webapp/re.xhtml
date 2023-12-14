@@ -40,11 +40,6 @@
                         #{anf.inhalt}
                     </h:column>
 
-                    <h:column>
-                        <f:facet name="header">Aktionen</f:facet>
-                        <h:commandButton value="Bearbeiten" action="#{rePageBean.gotoEdit(anf)}"/>
-                        <h:commandButton value="Löschen" action="#{rePageBean.remove(anf)}"/>
-                    </h:column>
                 </h:dataTable>
 
             </h:panelGroup>
@@ -65,27 +60,6 @@
                 <br/>
 
                 <h:commandButton value="Speichern" action="#{rePageBean.add()}"/>
-                <br/>
-                <h:commandButton value="Abbrechen" immediate="true" action="#{rePageBean.gotoList()}"/>
-
-            </h:panelGroup>
-
-            <h:panelGroup rendered="#{rePageBean.view == 'edit'}">
-                <h2>Anforderung Editieren</h2>
-
-                <label>
-                    Name der Anforderung:
-                    <h:inputText value="#{rePageBean.nameInput}" required="true"/>
-                </label>
-                <br/>
-
-                <label>
-                    Inhalt der Anforderung:
-                    <h:inputText value="#{rePageBean.inhaltInput}" required="true"/>
-                </label>
-                <br/>
-
-                <h:commandButton value="Speichern" action="#{rePageBean.saveEdit()}"/>
                 <br/>
                 <h:commandButton value="Abbrechen" immediate="true" action="#{rePageBean.gotoList()}"/>
 

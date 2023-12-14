@@ -6,7 +6,6 @@ import java.util.List;
 public class Testlauf {
     private int id;
     private String name;
-    private int testerUserId;
     private String testerUserMail;
 
     private List<Integer> testfaelleIds;
@@ -14,7 +13,6 @@ public class Testlauf {
     public Testlauf(int id, String name, int testerUserId, String testerUserMail, List<Integer> testfaelleIds) {
         this.id = id;
         this.name = name;
-        this.testerUserId = testerUserId;
         this.testerUserMail = testerUserMail;
         this.testfaelleIds = testfaelleIds;
     }
@@ -33,14 +31,6 @@ public class Testlauf {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getTesterUserId() {
-        return testerUserId;
-    }
-
-    public void setTesterUserId(int testerUserId) {
-        this.testerUserId = testerUserId;
     }
 
     public String getTesterUserMail() {
