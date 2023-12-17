@@ -45,10 +45,11 @@ public class TestfaelleDbBean implements Serializable {
 
     public void addTestfall(String beschreibung, int anforderungId) {
         try (
-                PreparedStatement ps = datebaseBean.getConnection().prepareStatement("INSERT INTO testfaelle (beschreibung, anforderungen_id) VALUES (?, ?)")
+                PreparedStatement ps = datebaseBean.getConnection().prepareStatement("INSERT INTO testfaelle (beschreibung, anforderungen_id, ergebnis) VALUES (?, ?, ?)")
         ) {
             ps.setString(1, beschreibung);
             ps.setInt(2, anforderungId);
+            ps.setString(3, "offen");
 
             ps.executeUpdate();
 

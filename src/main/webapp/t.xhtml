@@ -18,11 +18,56 @@
         <h:form>
             <h1>Tester:in</h1>
 
-            <h:outputText value="username:#{authorizeBean.user}"/>
-            <br/>
-            <h:outputText value="role:#{authorizeBean.user.role}"/>
+            <h:panelGroup rendered="#{tePageBean.view == 'list'}">
+                <h2>Deine Testfälle</h2>
+
+                <h:dataTable value="#{tePageBean.listTestfallErgebnisse}" var="tfe">
+                    <h:column>
+                        <f:facet name="header">Testfall ID</f:facet>
+                        #{tfe.testfallId}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Testfall Beschreibung</f:facet>
+                        #{tfe.testfallBeschreibung}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Testlauf Name</f:facet>
+                        #{tfe.testlaufName}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Testfall Ergebnis</f:facet>
+                        #{tfe.testfallErgebnis}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Aktion</f:facet>
+                        <h:commandButton value="Bearbeiten" action="#{tePageBean.gotoEdit(tfe)}"/>
+                    </h:column>
+
+                </h:dataTable>
+
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{tePageBean.view == 'edit'}">
+                <h2>Zu ändernder Testfall</h2>
+
+                <label>
+                    Ergebis für den Testfall:
+                    <h:inputText value="#{tePageBean.ergbnisInput}" required="true"/>
+                </label>
+                <br/>
+
+                <h:commandButton value="Speichern" action="#{tePageBean.saveEditedErgebnis()}"/>
+                <br/>
+                <h:commandButton value="Abbrechen" immediate="true" action="#{tePageBean.gotoList()}"/>
+
+            </h:panelGroup>
 
         </h:form>
     </h:panelGroup>
+
 </f:view>
 </html>
