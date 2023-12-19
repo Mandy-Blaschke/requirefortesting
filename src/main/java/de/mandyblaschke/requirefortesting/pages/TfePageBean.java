@@ -40,7 +40,6 @@ public class TfePageBean implements Serializable {
         listAnforderung = anforderungenDbBean.getAnforderungen();
     }
 
-
     public void add() {
         testfaelleDbBean.addTestfall(beschreibungInput, anforderungIdInput);
         gotoList();

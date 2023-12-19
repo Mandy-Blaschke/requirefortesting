@@ -26,10 +26,6 @@ public class AuthorizeBean implements Serializable {
         this.user = user;
     }
 
-    public boolean isAuthorized() {
-        return user != null;
-    }
-
     public boolean tryLogin(String mail) {
         User userByMail = userDbBean.getUserByMail(mail);
         if (userByMail != null) {
