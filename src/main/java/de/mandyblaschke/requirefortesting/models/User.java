@@ -1,6 +1,5 @@
 package de.mandyblaschke.requirefortesting.models;
 
-
 public class User {
     private int id;
     private String role;
@@ -35,5 +34,4 @@ public class User {
     public void setMail(String mail) {
         this.mail = mail;
     }
-
 }

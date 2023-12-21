@@ -1,6 +1,5 @@
 package de.mandyblaschke.requirefortesting.database;
 
-import de.mandyblaschke.requirefortesting.models.Anforderung;
 import de.mandyblaschke.requirefortesting.models.Testfall;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -19,8 +18,6 @@ import java.util.List;
 public class TestfaelleDbBean implements Serializable {
     @Inject
     private DatabaseBean datebaseBean;
-
-
 
     public List<Testfall> getTestfaelle() {
         try (

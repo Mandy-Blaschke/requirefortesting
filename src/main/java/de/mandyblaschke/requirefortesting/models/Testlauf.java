@@ -1,6 +1,5 @@
 package de.mandyblaschke.requirefortesting.models;
 
-
 import java.util.List;
 
 public class Testlauf {

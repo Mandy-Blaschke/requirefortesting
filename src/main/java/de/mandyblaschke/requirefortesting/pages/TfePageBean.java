@@ -7,7 +7,6 @@ import de.mandyblaschke.requirefortesting.models.Testfall;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
 import java.io.Serializable;
 import java.util.List;
 

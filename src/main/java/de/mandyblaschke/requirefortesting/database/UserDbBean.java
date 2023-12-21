@@ -2,8 +2,6 @@ package de.mandyblaschke.requirefortesting.database;
 
 import de.mandyblaschke.requirefortesting.models.User;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 

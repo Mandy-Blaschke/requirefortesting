@@ -1,13 +1,10 @@
 package de.mandyblaschke.requirefortesting.pages;
 
 import de.mandyblaschke.requirefortesting.database.AnforderungenDbBean;
-import de.mandyblaschke.requirefortesting.global.AuthorizeBean;
 import de.mandyblaschke.requirefortesting.models.Anforderung;
-import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
 import java.io.Serializable;
 import java.util.List;
 

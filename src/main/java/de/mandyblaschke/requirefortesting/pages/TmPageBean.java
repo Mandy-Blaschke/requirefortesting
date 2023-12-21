@@ -9,7 +9,6 @@ import de.mandyblaschke.requirefortesting.models.User;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +46,6 @@ public class TmPageBean implements Serializable {
         selectedTestfaelleIds = new ArrayList<>();
 
         listTestfall = testfaelleDbBean.getTestfaelle();
-
         listTesterUser = userDbBean.getTester();
     }
 

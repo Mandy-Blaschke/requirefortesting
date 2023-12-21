@@ -1,11 +1,9 @@
 package de.mandyblaschke.requirefortesting.pages;
 
-import de.mandyblaschke.requirefortesting.database.AnforderungenDbBean;
 import de.mandyblaschke.requirefortesting.global.AuthorizeBean;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
 import java.io.Serializable;
 
 @Named
@@ -43,7 +41,6 @@ public class LoginPageBean implements Serializable {
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
-
 
     public String loginSubmit() {
         boolean loginSuccess = authorizeBean.tryLogin(userInput);

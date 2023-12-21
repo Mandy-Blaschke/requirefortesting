@@ -1,6 +1,5 @@
 package de.mandyblaschke.requirefortesting.models;
 
-
 public class Anforderung {
     private int id;
     private String name;

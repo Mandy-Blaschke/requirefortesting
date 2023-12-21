@@ -1,6 +1,5 @@
 package de.mandyblaschke.requirefortesting.models;
 
-
 public class Testfall {
     private int id;
     private String beschreibung;

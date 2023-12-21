@@ -20,7 +20,6 @@ public class TestlaeufeDbBean implements Serializable {
     @Inject
     private DatabaseBean datebaseBean;
 
-
     public List<Testlauf> getTestlaeufe() {
         try (
                 PreparedStatement ps = datebaseBean.getConnection().prepareStatement("SELECT " +

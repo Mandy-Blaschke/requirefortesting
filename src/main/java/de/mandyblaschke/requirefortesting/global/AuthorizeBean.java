@@ -2,7 +2,6 @@ package de.mandyblaschke.requirefortesting.global;
 
 import de.mandyblaschke.requirefortesting.database.UserDbBean;
 import de.mandyblaschke.requirefortesting.models.User;
-import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -35,7 +34,5 @@ public class AuthorizeBean implements Serializable {
             setUser(null);
             return false;
         }
-
     }
-
 }
