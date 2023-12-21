@@ -29,8 +29,18 @@ CREATE TABLE `testfaelle` (
   `ergebnis` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `testfaelle`
+--
+
+LOCK TABLES `testfaelle` WRITE;
+/*!40000 ALTER TABLE `testfaelle` DISABLE KEYS */;
+INSERT INTO `testfaelle` VALUES (1,'Testfallbeispiel',1,'offen');
+/*!40000 ALTER TABLE `testfaelle` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -41,4 +51,4 @@ CREATE TABLE `testfaelle` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-14 20:11:17
+-- Dump completed on 2023-12-21 16:04:39

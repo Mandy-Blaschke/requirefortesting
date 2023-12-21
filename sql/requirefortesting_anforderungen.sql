@@ -28,8 +28,18 @@ CREATE TABLE `anforderungen` (
   `inhalt` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idanforderungen_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `anforderungen`
+--
+
+LOCK TABLES `anforderungen` WRITE;
+/*!40000 ALTER TABLE `anforderungen` DISABLE KEYS */;
+INSERT INTO `anforderungen` VALUES (1,'Beispielanforderung','Dies ist eine Beschreibung der Beispielanforderung.');
+/*!40000 ALTER TABLE `anforderungen` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -40,4 +50,4 @@ CREATE TABLE `anforderungen` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-14 20:11:17
+-- Dump completed on 2023-12-21 16:04:39
