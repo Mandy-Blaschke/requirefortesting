@@ -22,7 +22,7 @@ public class LoginPageBean implements Serializable {
     @Inject
     private TePageBean tePageBean;
 
-    private String userInput = "t@test.de";
+    private String userInput = "";
 
     public String getUserInput() {
         return userInput;
